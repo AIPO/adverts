@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Advert;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $adverts = Advert::all();
+        return view('welcome', compact('adverts'));
+//         return response()->json([
+//             'adverts' =>$adverts
+//         ]);
     }
 }

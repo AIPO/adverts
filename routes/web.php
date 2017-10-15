@@ -18,5 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
-
-Route::get('/home', 'HomeController@index')->name('home');
+//Adverts for logged users
+Route::group(['middelware' => 'auth'], function () {
+Route::resource('adverts', 'AdvertsController');
+});
+Route::get('/', 'HomeController@index')->name('home');
