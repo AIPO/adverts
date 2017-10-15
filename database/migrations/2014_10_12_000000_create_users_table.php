@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('token');
             $table->string('provider');
             $table->string('facebook_id');
+            $table->string('api_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

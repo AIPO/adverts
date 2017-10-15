@@ -15,11 +15,12 @@ class CreateAdvertsTable extends Migration
     {
         Schema::create('adverts', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->integer('advert_id')->unsigned();
             $table->string('name');
+            $table->string('image');
             $table->text('description');
             $table->string('type');
-            $table->integer('category_id');
+            $table->integer('category');
             $table->decimal('price',10,2);
             $table->timestamps();
         });
