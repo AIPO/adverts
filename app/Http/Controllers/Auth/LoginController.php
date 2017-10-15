@@ -25,7 +25,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -35,5 +35,39 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+    public function redirectToProvider($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    public function handleProviderCallback($provider)
+    {
+        try {
+            $user = Socialite::driver($provider)->user();
+        } catch (Exception $e) {
+            return redirect('/');
+        }
+        //return json_encode($user);
+        $authUser = $this->findOrCreateUser($user, $provider);
+        Auth::login($authUser, true);
+        return redirect($this->redirectTo);
+    }
+
+    private function findOrCreateUser($facebookUser, $provider)
+    {
+        $authUser = User::where('token', $facebookUser->token)->first();
+        if ($authUser) {
+            return $authUser;
+        }
+        return User::create([
+            'name' => $facebookUser->name,
+            'email' => $facebookUser->email,
+            'provider' => $provider,
+            'facebook_id' => $facebookUser->id,
+            'password' => bcrypt('123456'),
+            'token'=>$facebookUser->token,
+
+        ]);
     }
 }
