@@ -18,7 +18,7 @@ class AdvertsTableSeeder extends Seeder
         Advert::truncate();
 
         factory(App\User::class, 50)->create()->each(function ($u) {
-            $u->posts()->save(factory(App\Advert::class)->make());
+            $u->adverts()->save(factory(App\Advert::class)->make());
         });
 
     }
