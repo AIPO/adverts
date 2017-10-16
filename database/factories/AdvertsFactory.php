@@ -11,8 +11,8 @@ $factory->define(App\Advert::class, function (Faker $faker) {
             'name' => $faker->sentence(5),
             'description' => $faker->word,
             'image' => 'test.png',
-            'type' => $faker->randomElements(['sell','buy']),
+            'type' => $faker->randomElement(['sell','buy']),
             'category' => $faker->word,
-            'price' => $faker->randomFloat(2,0,0)
+            'price' => $faker->randomFloat(2,0,1000)
     ];
 });
