@@ -21,7 +21,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
-        'token' => str_random('60'),
+        'token' => str_random(60),
         'provider' => 'web',
         'facebook_id' => '0',
 

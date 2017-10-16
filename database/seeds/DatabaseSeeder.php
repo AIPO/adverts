@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\User;
+use App\Advert;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,7 +13,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UsersTableSeeder::class);
-        $this->call(AdvertsTableSeeder::class);
+        User::truncate();
+        Advert::truncate();
+
+        factory(App\User::class, 50)->create()->each(function ($u) {
+            $u->adverts()->save(factory(App\Advert::class)->make());
+        });
+        // $this->call(UsersTableSeeder::class);
+        //  $this->call(AdvertsTableSeeder::class);
     }
 }
