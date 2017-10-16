@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+//Adverts for logged users
+Route::group(['middelware' => 'auth'], function () {
+Route::resource('adverts', 'AdvertsController');
+});
+Route::get('/', 'HomeController@index')->name('home');
