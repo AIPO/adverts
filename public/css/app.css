@@ -11403,3 +11403,30 @@ button.close {
   clip: auto;
 }
 
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  background-color: #d6ddd2;
+}
+
+.sell {
+  color: green;
+}
+
+.buy {
+  color: #ff574f;
+}
+
+.card {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: .25rem;
+  text-indent: 3%;
+}
+
+.card-header {
+  background-color: inherit;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+

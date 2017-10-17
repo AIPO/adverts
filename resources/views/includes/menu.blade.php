@@ -1,2 +1,2 @@
-<li><a href="/">Home</a></li>
-<li><a href="/adverts">Adverts</a></li>
+<li><a href="{{ route('adverts.index') }}">Adverts</a></li>
+<li><a href="{{ route('adverts.create') }}">Create advert</a></li>

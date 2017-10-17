@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         User::truncate();
         Advert::truncate();
 
-        factory(App\User::class, 50)->create()->each(function ($u) {
+        factory(App\User::class, 20)->create()->each(function ($u) {
             $u->adverts()->save(factory(App\Advert::class)->make());
         });
         // $this->call(UsersTableSeeder::class);

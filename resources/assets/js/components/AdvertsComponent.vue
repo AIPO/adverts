@@ -1,24 +1,27 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Example Component</div>
+    <div>
+        <div v-for="advert in adverts">
+            <div class="card">
+                <h2 class="card-header" v-bind:class="advert.type">{{advert.id}} {{advert.name}}{{advert.price}} <i
+                        class="fa fa-eur"></i>
+                </h2>
+                <div class="card-body">
+                    <strong>Category:</strong> {{advert.category}}
+                    <p class="card-text">{{advert.description}}</p>
+                </div>
+                <hr>
+                <div class="card-footer text-muted">
 
-                    <div class="panel-body">
-                        I'm an example component!
-                    </div>
                 </div>
             </div>
+            <br/>
         </div>
+
     </div>
 </template>
 
 <script>
     export default {
-        props:['adverts'],
-        mounted() {
-            console.log('Component mounted.')
-        }
+        props: ['adverts'],
     }
 </script>

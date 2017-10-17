@@ -1,1 +1,1 @@
-<div id="copyright text-right">© Copyright 2013 Povilas Vaitonis</div>
+<p class="text-center">© Copyright {{date('Y')}} Povilas Vaitonis</p>

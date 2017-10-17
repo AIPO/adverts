@@ -9,7 +9,7 @@ $factory->define(App\Advert::class, function (Faker $faker) {
         return factory('App\User')->create()->id;
             },
             'name' => $faker->sentence(5),
-            'description' => $faker->word,
+            'description' => $faker->paragraph(4),
             'image' => 'test.png',
             'type' => $faker->randomElement(['sell','buy']),
             'category' => $faker->word,
