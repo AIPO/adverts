@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/default', 'HomeController@index');
+Route::get('/', 'HomeController@index');
 
 Auth::routes();
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');

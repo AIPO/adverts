@@ -19,8 +19,13 @@
                             Created: <strong>{{$advert->created_at->diffForHumans()}}</strong>
                             by {{$advert->user->name}}
                         </div>
+                        <a class="btn btn-info" href="{{ route('adverts.show',$advert->id) }}">Show</a>
+                        @if (Auth::user()->id == $advert->user_id)
+                            <a class="btn btn-primary" href="{{ route('adverts.edit',$advert->id) }}">Edit</a>
+                        @endif
                     </div>
                     <br/>
             @endforeach
+
             {{$adverts->links()}}
 @endsection
