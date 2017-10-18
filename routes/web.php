@@ -17,6 +17,7 @@ Auth::routes();
 Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 //Adverts for logged users
-Route::group(['middelware' => 'auth'], function () {
+Route::group(['middleware' => 'web'], function () {
     Route::resource('adverts', 'AdvertsController');
+    Route::get('advert/{id}', 'AdvertsController@show');
 });

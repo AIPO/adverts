@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','token', 'facebook_id', 'provider'
+        'name', 'email', 'password', 'token', 'facebook_id', 'provider'
     ];
 
     /**
@@ -30,5 +30,10 @@ class User extends Authenticatable
     public function adverts()
     {
         return $this->hasMany(Advert::class);
-}
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
 }

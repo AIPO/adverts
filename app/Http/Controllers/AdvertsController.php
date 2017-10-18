@@ -9,7 +9,7 @@ class AdvertsController extends Controller
 {
     public function __construct()
     {
-     //   $this->middleware('auth:api')->except('index', 'show');
+        //$this->middleware('auth:auth')->except('index', 'show');
     }
 
     /**
@@ -56,11 +56,7 @@ class AdvertsController extends Controller
         $advert = new Advert($request->all());
         $advert->image = $filename;
         $request->user()->adverts()->save($advert);
-        return response()->json([
-            'saved' => true,
-            'id' => $advert->id,
-            'message' => 'Your advert is published'
-        ]);
+        return redirect('adverts/index');
     }
 
     /**
@@ -84,7 +80,7 @@ class AdvertsController extends Controller
     public function edit($id)
     {
         $advert = Advert::find($id);
-        return view('adverts.edit');
+        return view('adverts.edit', compact('advert'));
     }
 
     /**
