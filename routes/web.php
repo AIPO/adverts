@@ -11,8 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'HomeController@index');
+
+Auth::routes();
+Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+//Adverts for logged users
+Route::group(['middleware' => 'web'], function () {
+    Route::resource('adverts', 'AdvertsController');
+    Route::get('advert/{id}', 'AdvertsController@show');
 });
 
 Auth::routes();

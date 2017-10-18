@@ -12,10 +12,6 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.
@@ -24,7 +20,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $adverts = Advert::all();
+        $adverts = Advert::paginate(10);
         return view('welcome', compact('adverts'));
 //         return response()->json([
 //             'adverts' =>$adverts

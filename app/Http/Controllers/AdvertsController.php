@@ -9,7 +9,7 @@ class AdvertsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except('index', 'show');
+        //$this->middleware('auth:auth')->except('index', 'show');
     }
 
     /**
@@ -19,12 +19,8 @@ class AdvertsController extends Controller
      */
     public function index()
     {
-        $adverts = Advert::orderBy('created_at', 'desc')
-            ->get(['id', 'user_id', 'name', 'description', 'type', 'category_id', 'price']);
-        return response()->json([
-                'adverts' => $adverts,
-            ]
-        );
+        $adverts = Advert::paginate(10);
+        return view('adverts.index', compact('adverts'));
     }
 
     /**
@@ -34,7 +30,7 @@ class AdvertsController extends Controller
      */
     public function create()
     {
-        //$form =
+        return view('adverts.create');
     }
 
     /**
@@ -60,11 +56,7 @@ class AdvertsController extends Controller
         $advert = new Advert($request->all());
         $advert->image = $filename;
         $request->user()->adverts()->save($advert);
-        return response()->json([
-            'saved' => true,
-            'id' => $advert->id,
-            'message' => 'Your advert is published'
-        ]);
+        return redirect('adverts/index');
     }
 
     /**
@@ -75,11 +67,8 @@ class AdvertsController extends Controller
      */
     public function show($id)
     {
-        $advert = Advert::with(['user', 'name', 'description'])
-            ->findOrFail($id);
-        return response()->json([
-            'adverts' => $advert,
-        ]);
+        $advert = Advert::find($id);
+        return view('adverts.show', compact('advert'));
     }
 
     /**
@@ -88,9 +77,10 @@ class AdvertsController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id, Request $request)
+    public function edit($id)
     {
-        //
+        $advert = Advert::find($id);
+        return view('adverts.edit', compact('advert'));
     }
 
     /**
@@ -102,7 +92,15 @@ class AdvertsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|255',
+            'description' => 'required',
+            'type' => 'required',
+            'category' => 'required',
+            'price' => 'required|number',
+        ]);
+        Advert::find($id)->update($request->all());
+        return view('adverts.index');
     }
 
     /**

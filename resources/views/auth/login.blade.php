@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -15,7 +14,8 @@
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                                <input id="email" type="email" class="form-control" name="email"
+                                       value="{{ old('email') }}" required autofocus>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -43,7 +43,8 @@
                             <div class="col-md-6 col-md-offset-4">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                                        <input type="checkbox"
+                                               name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
                                     </label>
                                 </div>
                             </div>
@@ -54,19 +55,19 @@
                                 <button type="submit" class="btn btn-primary">
                                     Login
                                 </button>
-                                <button href="{{ url('auth/facebook') }}" class="btn btn-primary">
-                                    Login with <i class="fa fa-facebook"></i>
-                                </button>
 
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your Password?
                                 </a>
                             </div>
                         </div>
+
                     </form>
+                    <a href="{{ url('auth/facebook') }}" class="btn btn-primary">
+                        Login with <i class="fa fa-facebook"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
